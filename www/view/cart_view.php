@@ -35,7 +35,7 @@
                 <input type="number" name="amount" value="<?php print(h($cart['amount'])); ?>">
                 個
                 <input type="submit" value="変更" class="btn btn-secondary">
-                <input type="hidden" name="cart_id" value="<?php print($cart['cart_id']); ?>">
+                <input type="hidden" name="cart_id" value="<?php print(h($cart['cart_id'])); ?>">
               </form>
             </td>
             <td><?php print(number_format(h($cart['price'] * $cart['amount']))); ?>円</td>
@@ -43,7 +43,7 @@
 
               <form method="post" action="cart_delete_cart.php">
                 <input type="submit" value="削除" class="btn btn-danger delete">
-                <input type="hidden" name="cart_id" value="<?php print($cart['cart_id']); ?>">
+                <input type="hidden" name="cart_id" value="<?php print(h($cart['cart_id'])); ?>">
               </form>
 
             </td>
@@ -51,7 +51,7 @@
           <?php } ?>
         </tbody>
       </table>
-      <p class="text-right">合計金額: <?php print number_format(h($total_price)); ?>円</p>
+      <p class="text-right">合計金額: <?php print number_format($total_price); ?>円</p>
       <form method="post" action="finish.php">
         <input class="btn btn-block btn-primary" type="submit" value="購入する">
       </form>
