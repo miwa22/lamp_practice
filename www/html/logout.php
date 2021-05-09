@@ -12,6 +12,6 @@ setcookie(session_name(), '', time() - 42000,
   $params["httponly"]
 );
 session_destroy();
-
+$token = get_post('token');
 redirect_to(LOGIN_URL);
 

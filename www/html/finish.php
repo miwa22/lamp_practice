@@ -21,6 +21,7 @@ if(purchase_carts($db, $carts) === false){
   redirect_to(CART_URL);
 } 
 
+$token = get_post('token');
 $total_price = sum_carts($carts);
 
 include_once '../view/finish_view.php';
