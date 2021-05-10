@@ -7,20 +7,21 @@ require_once MODEL_PATH . 'cart.php';
 
 session_start();
 
-if(is_logined() === false){
+if (is_logined() === false) {
   redirect_to(LOGIN_URL);
 }
 
 $db = get_db_connect();
 $user = get_login_user($db);
 
-$token = get_post('token');
 $item_id = get_post('item_id');
 if (is_valid_csrf_token($token)) {
-if(add_cart($db,$user['user_id'], $item_id)){
-  set_message('カートに商品を追加しました。');
+  if (add_cart($db, $user['user_id'], $item_id)) {
+    set_message('カートに商品を追加しました。');
+  } else {
+    set_error('カートの更新に失敗しました。');
+  }
 } else {
-  set_error('カートの更新に失敗しました。');
-}
+  set_error('不正な操作が行われました');
 }
 redirect_to(HOME_URL);

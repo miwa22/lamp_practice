@@ -7,7 +7,7 @@ require_once MODEL_PATH . 'cart.php';
 
 session_start();
 
-if(is_logined() === false){
+if (is_logined() === false) {
   redirect_to(LOGIN_URL);
 }
 
@@ -16,10 +16,10 @@ $user = get_login_user($db);
 
 $carts = get_user_carts($db, $user['user_id']);
 
-if(purchase_carts($db, $carts) === false){
+if (purchase_carts($db, $carts) === false) {
   set_error('商品が購入できませんでした。');
   redirect_to(CART_URL);
-} 
+}
 
 $token = get_post('token');
 $total_price = sum_carts($carts);
