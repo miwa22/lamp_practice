@@ -4,15 +4,18 @@ require_once MODEL_PATH . 'functions.php';
 require_once MODEL_PATH . 'user.php';
 require_once MODEL_PATH . 'item.php';
 
+//セッションスタート
 session_start();
-
+// $_SESSION['user_id']が''であった場合
 if (is_logined() === false) {
+  // ログインページリダイレクト
   redirect_to(LOGIN_URL);
 }
-
+// データベース処理
 $db = get_db_connect();
+// $_SESSION['user_id']の値を取得
 $user = get_login_user($db);
-
+// sql SELECT FROM itemsテーブル情報を取得
 $items = get_open_items($db);
 $token = get_csrf_token();
 include_once VIEW_PATH . 'index_view.php';
