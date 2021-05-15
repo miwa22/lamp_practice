@@ -3,13 +3,13 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: mysql
--- 生成日時: 2021 年 5 月 12 日 17:21
+-- 生成日時: 2021 年 5 月 14 日 23:50
 -- サーバのバージョン： 5.7.34
 -- PHP のバージョン: 7.4.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "+00:00"; 
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -28,22 +28,22 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `buy_detail` (
-  `order_id` int(11) DEFAULT NULL,
-  `item_id` int(11) DEFAULT NULL,
-  `amount` int(11) DEFAULT NULL,
-  `created` datetime DEFAULT CURRENT_TIMESTAMP
+  `order_id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `amount` int(11) NOT NULL,
+  `price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- テーブルの構造 `buy_historie`
+-- テーブルの構造 `buy_histories`
 --
 
-CREATE TABLE `buy_historie` (
+CREATE TABLE `buy_histories` (
   `order_id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `created` datetime DEFAULT CURRENT_TIMESTAMP
+  `user_id` int(11) NOT NULL,
+  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -51,10 +51,32 @@ CREATE TABLE `buy_historie` (
 --
 
 --
--- テーブルのインデックス `buy_historie`
+-- テーブルのインデックス `buy_detail`
 --
-ALTER TABLE `buy_historie`
+ALTER TABLE `buy_detail`
   ADD PRIMARY KEY (`order_id`);
+
+--
+-- テーブルのインデックス `buy_histories`
+--
+ALTER TABLE `buy_histories`
+  ADD PRIMARY KEY (`order_id`);
+
+--
+-- ダンプしたテーブルの AUTO_INCREMENT
+--
+
+--
+-- テーブルの AUTO_INCREMENT `buy_detail`
+--
+ALTER TABLE `buy_detail`
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- テーブルの AUTO_INCREMENT `buy_histories`
+--
+ALTER TABLE `buy_histories`
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
