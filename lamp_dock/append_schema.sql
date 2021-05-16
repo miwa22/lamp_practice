@@ -50,11 +50,11 @@ CREATE TABLE `buy_histories` (
 -- ダンプしたテーブルのインデックス
 --
 
---
+--s
 -- テーブルのインデックス `buy_detail`
 --
 ALTER TABLE `buy_detail`
-  ADD PRIMARY KEY (`item_id`);
+  ADD PRIMARY KEY (`item_id`); 
 
 --
 -- テーブルのインデックス `buy_histories`
