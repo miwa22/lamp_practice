@@ -55,10 +55,13 @@ function get_user_cart($db, $user_id, $item_id){
 }
 
 function add_cart($db, $user_id, $item_id ) {
+  // get_use_cartはSELECT文でcarts・itemsテーブルを結合された処理
   $cart = get_user_cart($db, $user_id, $item_id);
   if($cart === false){
+    // insert_cartはINSERT INTO carts(item_id,user_id,amount)の新規追加処理
     return insert_cart($db, $user_id, $item_id);
   }
+  // update_cart_amountはUPDATE cartsテーブルはamount・cart_idで更新処理
   return update_cart_amount($db, $cart['cart_id'], $cart['amount'] + 1);
 }
 
@@ -106,6 +109,7 @@ function purchase_carts($db, $carts){
     return false;
   }
   foreach($carts as $cart){
+    // updata_item_stockはUPDATE文でcartsテーブルでstock・item_idの更新処理
     if(update_item_stock(
         $db, 
         $cart['item_id'], 
@@ -114,7 +118,7 @@ function purchase_carts($db, $carts){
       set_error($cart['name'] . 'の購入に失敗しました。');
     }
   }
-  
+  // delete_use_cartsはDELETE文でcartsテーブルのuser_id削除処理
   delete_user_carts($db, $carts[0]['user_id']);
 }
 
@@ -151,6 +155,7 @@ function validate_cart_purchase($carts){
       set_error($cart['name'] . 'は在庫が足りません。購入可能数:' . $cart['stock']);
     }
   }
+  // has_errorは($_SESSION['__errors']) && count($_SESSION['__errors']) !== 0でなかった場合 
   if(has_error() === true){
     return false;
   }
