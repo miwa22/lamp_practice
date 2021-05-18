@@ -28,6 +28,7 @@ services:
 
   # 3. phpmyadminをインストールするコンテナ
   phpmyadmin:
+    
     image: phpmyadmin/phpmyadmin # phpmyadminのコンテナイメージをそのまま利用
     environment:
       - PMA_HOST=mysql # 上記で作成したmysqlコンテナに接続
