@@ -108,20 +108,57 @@ function purchase_carts($db, $carts){
   if(validate_cart_purchase($carts) === false){
     return false;
   }
-  foreach($carts as $cart){
-    // updata_item_stockはUPDATE文でcartsテーブルでstock・item_idの更新処理
-    if(update_item_stock(
-        $db, 
-        $cart['item_id'], 
-        $cart['stock'] - $cart['amount']
-      ) === false){
-      set_error($cart['name'] . 'の購入に失敗しました。');
-    }
-  }
-  // delete_use_cartsはDELETE文でcartsテーブルのuser_id削除処理
-  delete_user_carts($db, $carts[0]['user_id']);
+  // 購入後、カートの中身削除&在庫変動&購入履歴・明細にデータを挿入
+  $db->beginTransaction();
+  try {
+    insert_history($db, $carts[0]['user_id']);
+    $order_id = $db->lastInsertId();
+
+    foreach($carts as $cart){
+       insert_detail($db, $order_id, $cart['item_id'], $cart['price'], $cart['amount']); 
+       // updata_item_stockはUPDATE文でcartsテーブルでstock・item_idの更新処理
+       if(update_item_stock(
+          $db, 
+          $cart['item_id'], 
+          $cart['stock'] - $cart['amount']
+          ) === false){  
+          set_error($cart['name'] . 'の購入に失敗しました。');
+       }
+    } 
+    // delete_use_cartsはDELETE文でcartsテーブルのuser_id削除処理
+    delete_user_carts($db, $carts[0]['user_id']);
+    $db->commit();
+  }catch(PDOException $e) {
+      $db->rollback();
+      throw $e;
+   }
+}  
+// 購入履歴へINSERT
+function insert_history($db, $user_id){
+  $sql = "
+    INSERT INTO
+      buy_histories(
+        user_id
+      )
+    VALUES(?)
+  ";
+  return execute_query($db, $sql, [$user_id]);
 }
 
+// 購入明細にINSERT
+function insert_detail($db, $order_id, $item_id, $price, $amount){
+  $sql = "
+    INSERT INTO
+      buy_detail(
+        order_id,
+        item_id,
+        price,
+        amount
+      )
+    VALUES(?,?,?,?)
+  ";
+  return execute_query($db, $sql, [$order_id, $item_id, $price, $amount]);
+}
 function delete_user_carts($db, $user_id){
   $sql = "
     DELETE FROM
