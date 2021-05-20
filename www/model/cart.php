@@ -111,21 +111,15 @@ function purchase_carts($db, $carts){
   // 購入後、カートの中身削除&在庫変動&購入履歴・明細にデータを挿入
   $db->beginTransaction();
   if(has_error() === true){
-    if(insert_history(
-      $db, $carts[0]['user_id']) ===false){
-        set_error($carts['name'] . '履歴データの作成に失敗しました。');
-      }
     $order_id = $db->lastInsertId();
-
+    if(history_data($db,$carts) === false){
+      set_error('履歴データの作成に失敗しました。');
+    }
+    
     foreach($carts as $cart){
-       if(insert_detail(
-         $db, 
-         $order_id,
-         $cart['item_id'], 
-         $cart['price'], 
-         $cart['amount']) ===false){
-           set_error($cart['name'] . '明細データの作成に失敗しました。');
-       } 
+       if(item_detail($db, $order_id, $carts) === false){
+        set_error($carts['name'] . '明細データの作成に失敗しました。');
+       }
        // updata_item_stockはUPDATE文でcartsテーブルでstock・item_idの更新処理
        if(update_item_stock(
           $db, 
@@ -141,7 +135,15 @@ function purchase_carts($db, $carts){
   }else {
       $db->rollback();
    }
-}  
+   return true;
+}
+
+function history_data($db,$carts){
+  if(insert_history(
+    $db, $carts[0]['user_id']) === false){
+      return false;
+    }
+}
 // 購入履歴へINSERT
 function insert_history($db, $user_id){
   $sql = "
@@ -154,6 +156,16 @@ function insert_history($db, $user_id){
   return execute_query($db, $sql, [$user_id]);
 }
 
+function item_detail($db,$order_id,$carts){
+  if(insert_detail(
+    $db, 
+    $order_id,
+    $carts['item_id'], 
+    $carts['price'], 
+    $carts['amount']) === false){
+      return false;
+  } 
+}
 // 購入明細にINSERT
 function insert_detail($db, $order_id, $item_id, $price, $amount){
   $sql = "
