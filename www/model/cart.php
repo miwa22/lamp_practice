@@ -117,8 +117,8 @@ function purchase_carts($db, $carts){
     }
     
     foreach($carts as $cart){
-       if(item_detail($db, $order_id, $carts) === false){
-        set_error($carts['name'] . '明細データの作成に失敗しました。');
+       if(item_detail($db, $order_id, $cart) === false){
+        set_error($cart['name'] . '明細データの作成に失敗しました。');
        }
        // updata_item_stockはUPDATE文でcartsテーブルでstock・item_idの更新処理
        if(update_item_stock(
