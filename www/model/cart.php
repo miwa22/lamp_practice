@@ -132,10 +132,11 @@ function purchase_carts($db, $carts){
     // delete_use_cartsはDELETE文でcartsテーブルのuser_id削除処理
     delete_user_carts($db, $carts[0]['user_id']);
     $db->commit();
-  }else {
-      $db->rollback();
-   }
-   return true;
+    return true;
+  } 
+    $db->rollback();
+    return false;
+   
 }
 
 function history_data($db,$carts){
