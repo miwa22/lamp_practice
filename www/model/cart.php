@@ -110,12 +110,22 @@ function purchase_carts($db, $carts){
   }
   // 購入後、カートの中身削除&在庫変動&購入履歴・明細にデータを挿入
   $db->beginTransaction();
-  try {
-    insert_history($db, $carts[0]['user_id']);
+  if(has_error() === true){
+    if(insert_history(
+      $db, $carts[0]['user_id']) ===false){
+        set_error($carts['name'] . '履歴データの作成に失敗しました。');
+      }
     $order_id = $db->lastInsertId();
 
     foreach($carts as $cart){
-       insert_detail($db, $order_id, $cart['item_id'], $cart['price'], $cart['amount']); 
+       if(insert_detail(
+         $db, 
+         $order_id,
+         $cart['item_id'], 
+         $cart['price'], 
+         $cart['amount']) ===false){
+           set_error($cart['name'] . '明細データの作成に失敗しました。');
+       } 
        // updata_item_stockはUPDATE文でcartsテーブルでstock・item_idの更新処理
        if(update_item_stock(
           $db, 
@@ -128,9 +138,8 @@ function purchase_carts($db, $carts){
     // delete_use_cartsはDELETE文でcartsテーブルのuser_id削除処理
     delete_user_carts($db, $carts[0]['user_id']);
     $db->commit();
-  }catch(PDOException $e) {
+  }else {
       $db->rollback();
-      throw $e;
    }
 }  
 // 購入履歴へINSERT
