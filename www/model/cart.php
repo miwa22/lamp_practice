@@ -96,6 +96,7 @@ function update_cart_amount($db, $cart_id, $amount)
   return execute_query($db, $sql, [$amount, $cart_id]);
 }
 
+
 function delete_cart($db, $cart_id)
 {
   $sql = "
@@ -226,4 +227,5 @@ function validate_cart_purchase($carts)
   }
   return true;
 }
+
 
