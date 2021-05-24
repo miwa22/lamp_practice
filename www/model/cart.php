@@ -132,10 +132,10 @@ function purchase_carts($db, $carts)
   delete_user_carts($db, $carts[0]['user_id']);
   if (has_error() === true) {
     $db->rollback();
-    return true;
+    return false;
   } else {
     $db->commit();
-    return false;
+    return true;
   }
 }
 
