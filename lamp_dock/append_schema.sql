@@ -54,7 +54,7 @@ CREATE TABLE `buy_histories` (
 -- テーブルのインデックス `buy_detail`
 --
 ALTER TABLE `buy_detail`
-  ADD PRIMARY KEY (`order_id`,`item_id`)USING BTREE; 
+  ADD PRIMARY KEY (`order_id`,`item_id`) USING BTREE; 
 
 --
 -- テーブルのインデックス `buy_histories`
