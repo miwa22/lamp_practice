@@ -50,33 +50,17 @@ CREATE TABLE `buy_histories` (
 -- ダンプしたテーブルのインデックス
 --
 
-<<<<<<< HEAD
---
--- テーブルのインデックス `buy_detail`
---
-ALTER TABLE `buy_detail`
-  ADD PRIMARY KEY (`order_id`,`item_id`)USING BTREE;
-=======
 --s
 -- テーブルのインデックス `buy_detail`
 --
 ALTER TABLE `buy_detail`
-  ADD PRIMARY KEY (`order_id`,`item_id`)USING BTREE; 
->>>>>>> 889b9c48581f49c16320e28005594334750a50dc
+  ADD PRIMARY KEY (`order_id`,`item_id`) USING BTREE; 
 
 --
 -- テーブルのインデックス `buy_histories`
 --
 ALTER TABLE `buy_histories`
   ADD PRIMARY KEY (`order_id`);
-<<<<<<< HEAD
-
---
--- ダンプしたテーブルの AUTO_INCREMENT
---
-
-=======
->>>>>>> 889b9c48581f49c16320e28005594334750a50dc
 --
 -- テーブルの AUTO_INCREMENT `buy_histories`
 --
