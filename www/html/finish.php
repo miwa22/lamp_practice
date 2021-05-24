@@ -23,6 +23,7 @@ if (is_valid_csrf_token($token)) {
   $carts = get_user_carts($db, $user['user_id']);
   // カート商品が0だった場合エラーメッセージ表示
   if (purchase_carts($db, $carts) === false) {
+    
     set_error('商品が購入できませんでした。');
     // カートURLにリダイレクト
     redirect_to(CART_URL);
