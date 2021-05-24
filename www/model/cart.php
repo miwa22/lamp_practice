@@ -1,4 +1,4 @@
-<?php
+<?php 
 require_once MODEL_PATH . 'functions.php';
 require_once MODEL_PATH . 'db.php';
 
@@ -55,18 +55,18 @@ function get_user_cart($db, $user_id, $item_id)
   return fetch_query($db, $sql, [$user_id, $item_id]);
 }
 
-<<<<<<< HEAD
+ 
 function add_cart($db, $user_id, $item_id ) {
   // get_use_cartはSELECT文でcarts・itemsテーブルを結合された処理
   $cart = get_user_cart($db, $user_id, $item_id);
   if($cart === false){
-=======
+
 function add_cart($db, $user_id, $item_id)
 {
   // get_use_cartはSELECT文でcarts・itemsテーブルを結合された処理
   $cart = get_user_cart($db, $user_id, $item_id);
   if ($cart === false) {
->>>>>>> 81a1a86b5ed6524840f9946654fe92d8652c6147
+
     // insert_cartはINSERT INTO carts(item_id,user_id,amount)の新規追加処理
     return insert_cart($db, $user_id, $item_id);
   }
@@ -122,15 +122,6 @@ function purchase_carts($db, $carts)
   if (validate_cart_purchase($carts) === false) {
     return false;
   }
-<<<<<<< HEAD
-  foreach($carts as $cart){
-    // updata_item_stockはUPDATE文でcartsテーブルでstock・item_idの更新処理
-    if(update_item_stock(
-        $db, 
-        $cart['item_id'], 
-        $cart['stock'] - $cart['amount']
-      ) === false){
-=======
   // 購入後、カートの中身削除&在庫変動&購入履歴・明細にデータを挿入
   $db->beginTransaction();
   create_history($db, $carts);
@@ -141,7 +132,6 @@ function purchase_carts($db, $carts)
       $cart['item_id'],
       $cart['stock'] - $cart['amount']
     ) === false) {
->>>>>>> 81a1a86b5ed6524840f9946654fe92d8652c6147
       set_error($cart['name'] . 'の購入に失敗しました。');
     }
   }
@@ -239,14 +229,8 @@ function validate_cart_purchase($carts)
     }
   }
   // has_errorは($_SESSION['__errors']) && count($_SESSION['__errors']) !== 0でなかった場合 
-<<<<<<< HEAD
-  if(has_error() === true){
-=======
   if (has_error() === true) {
->>>>>>> 81a1a86b5ed6524840f9946654fe92d8652c6147
     return false;
   }
   return true;
 }
-
-
