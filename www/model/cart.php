@@ -55,12 +55,6 @@ function get_user_cart($db, $user_id, $item_id)
   return fetch_query($db, $sql, [$user_id, $item_id]);
 }
 
- 
-function add_cart($db, $user_id, $item_id ) {
-  // get_use_cartはSELECT文でcarts・itemsテーブルを結合された処理
-  $cart = get_user_cart($db, $user_id, $item_id);
-  if($cart === false){
-
 function add_cart($db, $user_id, $item_id)
 {
   // get_use_cartはSELECT文でcarts・itemsテーブルを結合された処理
