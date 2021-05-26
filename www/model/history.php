@@ -3,7 +3,7 @@ require_once MODEL_PATH. 'functions.php';
 require_once MODEL_PATH. 'db.php';
 
 // ユーザ毎の購入履歴
-function get_history($db, $user_id){
+/*function get_history($db, $user_id){
     $sql = "
       SELECT
         buy_histories.order_id,
@@ -42,4 +42,4 @@ function get_allhistory($db){
         order_id desc
     ";
     return fetch_all_query($db, $sql);
-}
+}*/
