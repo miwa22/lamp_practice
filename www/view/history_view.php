@@ -26,9 +26,9 @@
                 <tbody>
                     <?php foreach ($histories as $history) { ?>
                         <tr>
-                            <td><?php print($history['order_id']); ?></td>
+                            <td>NO.<?php print($history['order_id']); ?></td>
                             <td><?php print($history['created']); ?></td>
-                            <td><?php print($history['total']); ?>円</td>
+                            <td>計.<?php print(numder_format(h($history['total']))); ?>円</td>
                             <td>
                                 <form method='post' action='detail.php'>
                                     <input type='submit' value='購入詳細表示'>
