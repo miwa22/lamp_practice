@@ -26,15 +26,16 @@
                 <tbody>
                     <?php foreach ($histories as $history) { ?>
                         <tr>
-                            <td>NO.<?php print($history['order_id']); ?></td>
-                            <td><?php print($history['created']); ?></td>
+                            <td>NO.<?php print(h($history['order_id'])); ?></td>
+                            <td><?php print(h($history['created'])); ?></td>
                             <td>計.<?php print(numder_format(h($history['total']))); ?>円</td>
                             <td>
                                 <form method='post' action='detail.php'>
                                     <input type='submit' value='購入詳細表示'>
-                                    <input type='hidden' name='order_id' value='<?php print($history['order_id']); ?>'>
-                                    <input type='hidden' name='created' value='<?php print($history['created']); ?>'>
-                                    <input type='hidden' name='total' value='<?php print($history['total']); ?>'>
+                                    <input type='hidden' name='order_id' value='<?php print(h($history['order_id'])); ?>'>
+                                    <input type='hidden' name='created' value='<?php print(h($history['created'])); ?>'>
+                                    <input type='hidden' name='total' value='<?php print(h($history['total'])); ?>'>
+                                    <input type='hidden' name='token' value='<?php print $token ?>'>
                                 </form>
                             </td>
                         </tr>
