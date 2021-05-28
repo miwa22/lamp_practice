@@ -203,7 +203,7 @@ function get_history($db, $user_id)
     WHERE
       user_id = ?
     GROUP BY
-      buy_historyies.order_id
+      buy_histories.order_id
     ORDER BY
       created desc
   ";
@@ -224,7 +224,7 @@ function get_allhistory($db)
     ON
       buy_histories.order_id = buy_detail.order_id
     GROUP BY
-      buy_historyies.order_id
+      buy_histories.order_id
     ORDER BY
       created desc
   ";
