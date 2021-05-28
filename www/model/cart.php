@@ -247,11 +247,30 @@ function get_detail($db, $order_id)
     ON
       buy_detail.item_id = items.item_id
     WHERE
-      order_id = ?
+      buy_detail.order_id = ?
     GROUP BY
       buy_detail.price, buy_detail.amount,items.name
   ";
   return fetch_all_query($db, $sql, [$order_id]);
+}
+function get_admin_detail($db)
+{
+  $sql = "
+    SELECT
+      buy_detail.price,
+      buy_detail.amount,
+      SUM(buy_detail.price * buy_detail.amount) AS subtotal,
+      items.name
+    FROM
+      buy_detail
+    JOIN
+      items
+    ON
+      buy_detail.item_id = items.item_id
+    GROUP BY
+      buy_detail.price, buy_detail.amount,items.name
+  ";
+  return fetch_all_query($db, $sql);
 }
 
 function delete_user_carts($db, $user_id)
