@@ -15,9 +15,10 @@
         <table class='table table-bordered'>
             <thead class='thead-light'>
                 <tr>
-                    <th><button type='button'>注文番号</button</th>
-                    <th><button type='button'>購入日時</button></th>
-                    <th><button type='button'>合計金額</button></th>
+                    <th>注文番号</th>
+                    <th>購入日時</th>
+                    <th>合計金額</th>
+                    <th>購入詳細表示</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,10 +43,10 @@
         <table class='table table-bordered'>
             <thead class='thead-light'>
                 <tr>
-                    <th><button type='button'>商品名</button></th>
-                    <th><button type='button'>価格</button></th>
-                    <th><button type='button'>購入数</button></th>
-                    <th><button type='button'>小計</button></th>
+                    <th>商品名</th>
+                    <th>価格</th>
+                    <th>購入数</th>
+                    <th>小計</th>
                 </tr>
             </thead>
             <tbody>

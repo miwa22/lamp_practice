@@ -18,9 +18,10 @@
             <table class='table table-bordered text-center'>
                 <thead class='thead-light'>
                     <tr>
-                        <th><button type='button'>注文番号</button></th>
-                        <th><button type='button'>購入日時</button></th>
-                        <th><button type='button'>該当の注文合計金額</button></th>
+                        <th>注文番号</th>
+                        <th>購入日時</th>
+                        <th>該当の注文合計金額</th>
+                        <th>購入詳細表示</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,7 +30,6 @@
                             <td>NO.<?php print(h($history['order_id'])); ?></td>
                             <td><?php print(h($history['created'])); ?></td>
                             <td>計.<?php print(h($history['total'])); ?>円</td>
-                            <td>
                                 <form method='post' action='detail.php'>
                                     <input type='submit' value='購入詳細表示'>
                                     <input type='hidden' name='order_id' value='<?php print(h($history['order_id'])); ?>'>
