@@ -42,10 +42,10 @@
         <table class='table table-bordered'>
             <thead class='thead-light'>
                 <tr>
-                    <th>商品名</th>
-                    <th>価格</th>
-                    <th>購入数</th>
-                    <th>小計</th>
+                    <th><button type='button'>商品名</button></th>
+                    <th><button type='button'>価格</button></th>
+                    <th><button type='button'>購入数</button></th>
+                    <th><button type='button'>小計</button></th>
                 </tr>
             </thead>
             <tbody>
