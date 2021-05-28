@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once MODEL_PATH . 'functions.php';
 require_once MODEL_PATH . 'db.php';
 
@@ -187,7 +187,8 @@ function insert_detail($db, $order_id, $item_id, $price, $amount)
   return execute_query($db, $sql, [$order_id, $item_id, $price, $amount]);
 }
 // ユーザ毎の購入履歴
-function get_history($db, $user_id){
+function get_history($db, $user_id)
+{
   $sql = "
     SELECT
       buy_histories.order_id,
@@ -209,8 +210,9 @@ function get_history($db, $user_id){
   return fetch_all_query($db, $sql, [$user_id]);
 }
 
-function get_allhistory($db){
-$sql = "
+function get_allhistory($db)
+{
+  $sql = "
     SELECT
       buy_histories.order_id,
       buy_histories.created,
@@ -227,6 +229,29 @@ $sql = "
       order_id desc
   ";
   return fetch_all_query($db, $sql);
+}
+
+// ユーザ毎の購入明細
+function get_detail($db, $order_id)
+{
+  $sql = "
+    SELECT
+      buy_detail.price,
+      buy_detail.amount,
+      SUM(buy_detail.price * buy_detail.amount) AS subtotal,
+      items.name
+    FROM
+      buy_detail
+    JOIN
+      items
+    ON
+      buy_detail.item_id = items.item_id
+    WHERE
+      order_id = ?
+    GROUP BY
+      buy_detail.price, buy_detail.amount,items.name
+  ";
+  return fetch_all_query($db, $sql, [$order_id]);
 }
 
 function delete_user_carts($db, $user_id)

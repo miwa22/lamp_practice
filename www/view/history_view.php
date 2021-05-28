@@ -18,9 +18,9 @@
             <table class='table table-bordered text-center'>
                 <thead class='thead-light'>
                     <tr>
-                        <th>注文番号</th>
-                        <th>購入日時</th>
-                        <th>該当の注文合計金額</th>
+                        <th><button type='button'>注文番号</button></th>
+                        <th><button type='button'>購入日時</button></th>
+                        <th><button type='button'>該当の注文合計金額</button></th>
                     </tr>
                 </thead>
                 <tbody>
