@@ -28,11 +28,9 @@
                         <td><?php print(h($history['created'])); ?></td>
                         <td><?php print($history['total']); ?>円</td>
                         <td>
-                            <form method='post' action='detail.php'>
+                            <form method='post' action='details.php'>
                                 <input type='submit' value='購入詳細表示'>
                                 <input type='hidden' name='order_id' value='<?php print(h($history['order_id'])); ?>'>
-                                <input type='hidden' name='created' value='<?php print(h($history['created'])); ?>'>
-                                <input type='hidden' name='total' value='<?php print(h($history['total'])); ?>'>
                                 <input type='hidden' name='token' value='<?php print $token ?>'>
                             </form>
                         </td>
