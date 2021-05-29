@@ -231,8 +231,72 @@ function get_allhistory($db)
   return fetch_all_query($db, $sql);
 }
 
+function get_history_list($db, $order_id, $user_id)
+{
+  $sql = "
+    SELECT
+      buy_histories.order_id,
+      buy_histories.created,
+      SUM(buy_detail.price * buy_detail.amount) AS total
+    FROM
+      buy_histories
+    JOIN
+      buy_detail
+    ON
+      buy_histories.order_id = buy_detail.order_id
+    WHERE
+      buy_histories.order_id = ? AND buy_histories.user_id = ?
+    GROUP BY
+      buy_histories.order_id
+  
+  ";
+  return fetch_all_query($db, $sql, [$order_id, $user_id]);
+}
+
+function get_adminhistory_list($db, $order_id)
+{
+  $sql = "
+    SELECT
+      buy_histories.order_id,
+      buy_histories.created,
+      SUM(buy_detail.price * buy_detail.amount) AS total
+    FROM
+      buy_histories
+    JOIN
+      buy_detail
+    ON
+      buy_histories.order_id = buy_detail.order_id
+    WHERE
+      buy_histories.order_id = ? 
+    GROUP BY
+      buy_histories.order_id
+  
+  ";
+  return fetch_all_query($db, $sql, [$order_id]);
+}
+
 // ユーザ毎の購入明細
-function get_detail($db, $order_id)
+function get_detail($db, $order_id, $user_id)
+{
+  $sql = "
+    SELECT
+      buy_detail.price,
+      buy_detail.amount,
+      items.name
+    FROM
+      buy_detail
+    JOIN
+      items
+    ON
+      buy_detail.item_id = items.item_id
+    JOIN
+      buy_histories
+    WHERE
+      buy_detail.order_id = ? AND buy_histories.user_id = ?   
+  ";
+  return fetch_all_query($db, $sql, [$order_id, $user_id]);
+}
+function  get_admin_detail($db, $order_id)
 {
   $sql = "
     SELECT
@@ -247,25 +311,6 @@ function get_detail($db, $order_id)
       buy_detail.item_id = items.item_id
     WHERE
       buy_detail.order_id = ?
-   
-      //buy_detail.price, buy_detail.amount,items.name
-  ";
-  return fetch_all_query($db, $sql, [$order_id]);
-}
-function get_admin_detail($db,$order_id)
-{
-  $sql = "
-    SELECT
-      buy_detail.price,
-      buy_detail.amount,
-      items.name
-    FROM
-      buy_detail
-    JOIN
-      items
-    ON
-      buy_detail.item_id = items.item_id
-    
   ";
   return fetch_all_query($db, $sql, [$order_id]);
 }
@@ -312,4 +357,3 @@ function validate_cart_purchase($carts)
   }
   return true;
 }
-
