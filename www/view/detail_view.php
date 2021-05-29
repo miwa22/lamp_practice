@@ -24,12 +24,11 @@
             <tbody>
                 <?php foreach ($histories as $history) { ?>
                     <tr>
-                        <td>NO.<?php print(h($history['order-id'])); ?></td>
+                        <td>NO.<?php print(h($history['order_id'])); ?></td>
                         <td><?php print(h($history['created'])); ?></td>
                         <td><?php print($history['total']); ?>円</td>
                         <td>
                             <form method='post' action='details.php'>
-                                <input type='submit' value='購入詳細表示'>
                                 <input type='hidden' name='order_id' value='<?php print(h($history['order_id'])); ?>'>
                                 <input type='hidden' name='token' value='<?php print $token ?>'>
                             </form>
@@ -48,12 +47,12 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($details as $betail) { ?>
+                <?php foreach ($details as $detail) { ?>
                     <tr>
                         <td><?php print(h($detail['name'])); ?></td>
                         <td><?php print(h($detail['price'])); ?>円</td>
                         <td><?php print(h($detail['amount'])); ?>個</td>
-                        <td><?php print(h($detail['sutotal'])); ?>円</td>
+                        <td><?php print(h($detail['subtotal'])); ?>円</td>
                     </tr>
                 <?php } ?>
             </tbody>

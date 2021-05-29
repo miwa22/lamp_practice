@@ -32,6 +32,7 @@
                     <input type="submit" value="カートに追加" class="btn btn-primary btn-block">
                     <input type="hidden" name="item_id" value="<?php print(h($item['item_id'])); ?>">
                   </form>
+                  <p><a href ='histories.php'>購入履歴</a></p>
                 <?php } else { ?>
                   <p class="text-danger">現在売り切れです。</p>
                 <?php } ?>

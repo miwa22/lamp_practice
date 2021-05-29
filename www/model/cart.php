@@ -282,6 +282,7 @@ function get_detail($db, $order_id, $user_id)
     SELECT
       buy_detail.price,
       buy_detail.amount,
+      buy_detail.price * buy_detail.amount AS subtotal,
       items.name
     FROM
       buy_detail
@@ -291,6 +292,8 @@ function get_detail($db, $order_id, $user_id)
       buy_detail.item_id = items.item_id
     JOIN
       buy_histories
+    ON
+      buy_detail.order_id = buy_histories.order_id
     WHERE
       buy_detail.order_id = ? AND buy_histories.user_id = ?   
   ";
@@ -302,6 +305,7 @@ function  get_admin_detail($db, $order_id)
     SELECT
       buy_detail.price,
       buy_detail.amount,
+      buy_detail.price * buy_detail.amount AS subtotal, 
       items.name
     FROM
       buy_detail
