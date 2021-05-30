@@ -13,6 +13,8 @@
         <h1>購入詳細</h1>
         <?php include VIEW_PATH . 'templates/messages.php'; ?>
         <table class='table table-bordered'>
+            <thead class='thead-light'>
+            </thead>
             <tbody>
                 <?php foreach ($histories as $history) { ?>
                     <tr>
