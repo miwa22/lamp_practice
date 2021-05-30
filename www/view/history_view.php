@@ -10,7 +10,7 @@
 <body>
     <?php include VIEW_PATH . 'templates/header_logined.php'; ?>
     <div class='container'>
-        <h1><a href='histories.php'>購入履歴</a></h1>
+        <h1>購入履歴</h1>
 
         <?php include VIEW_PATH . 'templates/messages.php'; ?>
 
