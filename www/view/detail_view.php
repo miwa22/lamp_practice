@@ -14,6 +14,11 @@
         <?php include VIEW_PATH . 'templates/messages.php'; ?>
         <table class='table table-bordered'>
             <thead class='thead-light'>
+                <tr>
+                    <th>注文番号</th>
+                    <th>購入日時</th>
+                    <th>合計金額</th>
+                </tr>
             </thead>
             <tbody>
                 <?php foreach ($histories as $history) { ?>
@@ -21,10 +26,6 @@
                         <td>NO.<?php print(h($history['order_id'])); ?></td>
                         <td><?php print(h($history['created'])); ?></td>
                         <td><?php print($history['total']); ?>円</td>
-                        <form method='post' action='details.php'>
-                            <input type='hidden' name='order_id' value='<?php print(h($history['order_id'])); ?>'>
-                            <input type='hidden' name='token' value='<?php print $token ?>'>
-                        </form>
                     </tr>
                 <?php } ?>
             </tbody>
