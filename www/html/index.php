@@ -21,6 +21,6 @@ $user = get_login_user($db);
 $items = get_open_items($db);
 //$data = get_open_items($db);
 
-$data_ranking = get_ranking($db);
+$ranking = get_ranking($db);
 //$ranking = 1;
 include_once VIEW_PATH . 'index_view.php';
