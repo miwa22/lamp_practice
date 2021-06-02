@@ -54,12 +54,12 @@
         <?php foreach ($ranking as $value) { ?>
           <div class='col-4 item'>
             <div class='header'>
-              <?php print('第' . ($value + 1) . '位:' . h($value['name'])); ?>
+              <?php print('第' . ($ker+ 1) . '位:' . h($value['name'])); ?>
             </div>
             <figure class='card-body'>
               <img class='card-img h-20' src='<?php print(IMAGE_PATH . h($value['image'])); ?>'>
               <figcaption>
-                <?php print(number_format(h($value['price']))); ?>円
+                <?php print(h($value['price'])); ?>円
                 <?php if ($item['stock'] > 0) { ?>
                   <form action='index_add_cart.php' method='post'>
                     <input type='hidden' name='token' value='<?php print $token ?>'>
