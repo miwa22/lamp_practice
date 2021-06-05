@@ -80,7 +80,7 @@ function get_ranking($db)
 
 function get_open_ranking($db)
 {
-  return get_ranking($db, true);
+  return get_ranking($db);
 }
 
 function regist_item($db, $name, $price, $stock, $status, $image)
