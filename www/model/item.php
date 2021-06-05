@@ -62,7 +62,9 @@ function get_ranking($db)
      items.item_id,
      name,
      SUM(amount) AS total,
-     image
+     image,
+     items.price,
+     COUNT(*) + 1 AS RANK
    FROM 
      items
    JOIN
