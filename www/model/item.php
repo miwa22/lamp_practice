@@ -59,24 +59,20 @@ function get_ranking($db)
 {
   $sql = '
    SELECT
-   　buy_histories.user_id,
      items.item_id,
      name,
      SUM(amount) AS total,
-     image,
-     rank() over (order by total DESC) AS rank
+     image
    FROM 
      items
    JOIN
      buy_detail
    ON
      items.item_id = buy_detail.item_id 
-   JOIN
-     buy_histories
-   ON 
-     buy_detail.order_id = buy_histories.order_id
    GROUP BY
      items.item_id 
+   ORDER BY
+     total DESC
    LIMIT 3';
 
   return fetch_all_query($db, $sql);
