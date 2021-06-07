@@ -18,10 +18,10 @@ $db = get_db_connect();
 // $_SESSION['user_id']の値を取得
 $user = get_login_user($db);
 // sql SELECT FROM itemsテーブル情報を取得
-$data = get_open_items($db);
-$items = change_htmlsp_array($data);
+$items = get_open_items($db);
+//$items = change_htmlsp_array($data);
 
-$data_ranking = get_open_ranking($db);
-$ranking = change_htmlsp_array($data_ranking);
+$ranking = get_open_ranking($db);
+//$ranking = change_htmlsp_array($data_ranking);
 
 include_once VIEW_PATH . 'index_view.php';

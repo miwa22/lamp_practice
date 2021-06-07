@@ -161,7 +161,7 @@ function h($str)
   return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
 }
 
-function change_htmlsp_array($assoc_array)
+/*function change_htmlsp_array($assoc_array)
 {
   foreach ((array)$assoc_array as $ker => $values) {
     foreach ((array)$values as $kers => $value) {
@@ -170,7 +170,8 @@ function change_htmlsp_array($assoc_array)
     }
   }
   return $assoc_array;
-}
+}*/
+
 // トークンの生成
 function get_csrf_token()
 {
