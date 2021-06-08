@@ -49,20 +49,18 @@
   <div class='container'>
     <h1>人気ランキングTOP3</h1>
     <?php include VIEW_PATH . 'templates/messages.php'; ?>
-    <div class='card-deck'>
-      <div class='row mb-3'>
-        <?php foreach ($ranking as $key=>$value) { ?>
-          <div class='col-4 item'>
-            <div class='header'>
-              <?php print($key+1) ?>位
-              <?php print(h($value['name']));?>
-            </div>
-          </div>
-      </div>
-    <?php } ?>
-    </div>
-  </div>
+    <table class='table table-borderd'>
+      <thead class='thead-light'>
+        <?php foreach ($ranking as $key => $value) { ?>
+          <tr>
+            <td><?php print($key + 1) ?>位</td>
+            <td><?php print(h($value['name'])); ?></td>
+          </tr>
+        <?php } ?>
+      </thead>
+    </table>
   </div>
 
 </body>
+
 </html>
