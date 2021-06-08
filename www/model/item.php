@@ -60,7 +60,8 @@ function get_ranking($db)
   $sql = '
    SELECT
      items.item_id,
-     name
+     name,
+     SUM(amount) AS total
    FROM 
      items
    JOIN
@@ -69,6 +70,8 @@ function get_ranking($db)
      items.item_id = buy_detail.item_id 
    GROUP BY
      items.item_id 
+   ORDER BY 
+     total DESC
    LIMIT 3';
 
   return fetch_all_query($db, $sql);
