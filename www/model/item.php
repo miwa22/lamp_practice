@@ -60,11 +60,7 @@ function get_ranking($db)
   $sql = '
    SELECT
      items.item_id,
-     name,
-     SUM(amount) AS total,
-     image,
-     items.price,
-     COUNT(*) + 1 AS RANK
+     name
    FROM 
      items
    JOIN
@@ -73,17 +69,15 @@ function get_ranking($db)
      items.item_id = buy_detail.item_id 
    GROUP BY
      items.item_id 
-   ORDER BY
-     total DESC
    LIMIT 3';
 
   return fetch_all_query($db, $sql);
 }
 
-function get_open_ranking($db)
+/*function get_open_ranking($db)
 {
   return get_ranking($db);
-}
+}*/
 
 function regist_item($db, $name, $price, $stock, $status, $image)
 {

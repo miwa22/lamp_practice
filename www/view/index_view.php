@@ -51,18 +51,12 @@
     <?php include VIEW_PATH . 'templates/messages.php'; ?>
     <div class='card-deck'>
       <div class='row mb-3'>
-        <?php foreach ($ranking as $ker=>$value) { ?>
+        <?php foreach ($ranking as $key=>$value) { ?>
           <div class='col-4 item'>
             <div class='header'>
-              <?php print($ker+1) ?>位
+              <?php print($key+1) ?>位
               <?php print(h($value['name']));?>
             </div>
-            <figure class='card-body'>
-              <img class='card-img h-20' src='<?php print(IMAGE_PATH . h($value['image'])); ?>'>
-              <figcaption>
-                <?php print(h($value['price'])); ?>円
-              </figcaption>
-            </figure>
           </div>
       </div>
     <?php } ?>
@@ -71,5 +65,4 @@
   </div>
 
 </body>
-
 </html>
