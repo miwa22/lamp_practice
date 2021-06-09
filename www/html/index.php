@@ -11,11 +11,15 @@ if (is_logined() === false) {
   // ログインページリダイレクト
   redirect_to(LOGIN_URL);
 }
+// トークン生成
+$token = get_csrf_token();
 // データベース処理
 $db = get_db_connect();
 // $_SESSION['user_id']の値を取得
 $user = get_login_user($db);
 // sql SELECT FROM itemsテーブル情報を取得
 $items = get_open_items($db);
-$token = get_csrf_token();
+
+$ranking = get_ranking($db);
+
 include_once VIEW_PATH . 'index_view.php';
